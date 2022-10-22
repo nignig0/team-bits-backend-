@@ -54,5 +54,5 @@ class OrderSerializer(serializers.ModelSerializer):
 class CartSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Cart
-        fieds = ['orders', 'total']
+        fields = ['orders', 'total']
         read_only_fields = ['orders', 'total']
