@@ -35,8 +35,8 @@ class UserSerializer(serializers.ModelSerializer):
 class BusinessSerializer(serializers.ModelSerializer):
     class Meta:
         model = Business
-        fields = ['name', 'description','owner', 'logo_url']
-        read_only_fields = ['owner','logo_url', ]
+        fields = ['pk','name', 'description','owner', 'logo_url']
+        read_only_fields = ['pk','owner','logo_url', ]
 
 class ItemSerializer(serializers.ModelSerializer):
     categories = serializers.SlugRelatedField(
