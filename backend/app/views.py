@@ -246,11 +246,11 @@ def add_to_cart(request):
         order = Order.objects.create(
             item = item, 
             user_from = request.user, 
-            amount = request.data.get('amount')
+            amount = int(request.data.get('amount'))
         )
         
         cart.orders.add(order)
-        total = (item.price * order.amount)
+        total = int(item.price * order.amount)
         cart.total += total
         cart.save()
         serialized_orders = OrderSerializer(cart.orders, many = True)
@@ -273,7 +273,7 @@ def remove_from_cart(request, pk): #primary key of order to be removed
         order  = Order.objects.get(pk = pk)
         cart.remove(order)
 
-        total = (order.amount * order.item.price)
+        total = int(order.amount * order.item.price)
         cart.total -= total
         cart.save()
         serialized_orders = OrderSerializer(cart.orders, many = True)
