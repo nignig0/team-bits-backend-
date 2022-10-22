@@ -42,7 +42,6 @@ class ItemSerializer(serializers.ModelSerializer):
     category = serializers.SlugRelatedField(
         slug_field = 'name',
         queryset = Category.objects.all(), 
-        many = True
     )
     class Meta: 
         model = Item
