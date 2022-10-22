@@ -39,7 +39,7 @@ class BusinessSerializer(serializers.ModelSerializer):
         read_only_fields = ['pk','owner','logo_url', ]
 
 class ItemSerializer(serializers.ModelSerializer):
-    categories = serializers.SlugRelatedField(
+    category = serializers.SlugRelatedField(
         slug_field = 'name',
         queryset = Category.objects.all(), 
         many = True
