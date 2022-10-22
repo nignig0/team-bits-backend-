@@ -278,7 +278,7 @@ def remove_from_cart(request, pk): #primary key of order to be removed
         cart.save()
         serialized_orders = OrderSerializer(cart.orders, many = True)
         return Response({
-            'message': 'Item added to cart successfully!', 
+            'message': 'Item removed from cart successfully!', 
             'cart': serialized_orders.data
         })
     except Exception as e: 
