@@ -52,7 +52,6 @@ class OrderSerializer(serializers.ModelSerializer):
         read_only_fields = ['pk','user_from', 'amount'] 
 
 class CartSerializer(serializers.ModelSerializer):
-    orders = OrderSerializer()
     class Meta: 
         model = Cart
         fields = ['orders', 'total']
