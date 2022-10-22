@@ -174,10 +174,10 @@ def create_items(request):
         instance = ItemSerializer(data = request.data)
         if instance.is_valid():
             business = Business.objects.get(owner = request.user)
-            file = request.FILES['logo']
+            file = request.FILES['picture']
             name = request.data.get('name')
-            cloudinary.uploader.upload(file, public_id = f'logo for item {name} for business {business}', overwrite = True, uniqueFilename = True)
-            url = cloudinary.CloudinaryImage(f'logo for business {name} for business {business}').build_url()
+            cloudinary.uploader.upload(file, public_id = f'picture for item {name} for business {business}', overwrite = True, uniqueFilename = True)
+            url = cloudinary.CloudinaryImage(f'picture for business {name} for business {business}').build_url()
             category = Category.objects.get(name = request.data.get('category'))
             item  = Item.objects.create(
                 name = request.data.get('name'), 
