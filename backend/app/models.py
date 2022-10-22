@@ -7,20 +7,25 @@ class User(AbstractUser):
 
 class Business(models.Model):
     name = models.CharField(max_length = 500, unique = True)
-    logo_url = models.CharField(max_length = 1000)
-    owner = models.ForeignKey(User, on_delete = models.CASCADE)
+    logo_url = models.CharField(max_length = 1000,)
+    owner = models.ForeignKey(User, on_delete = models.CASCADE, blank = True)
+    description = models.TextField()
 
     def __str__(self):
         return self.name
-    
+class Category(models.Model):
+    name  = models.CharField(max_length = 200)
+
+    def __str__(self):
+        return self.name    
 
 class Item(models.Model):
     name = models.CharField(max_length = 500)
     business = models.ForeignKey(Business, on_delete = models.CASCADE, blank = True)
     price = models.PositiveIntegerField()
     description = models.TextField()
-    type = models.CharField(max_length = 50) #Either PRODUCT OR SERVICE
     picture_url = models.CharField(max_length = 1000)
+    category = models.ForeignKey(Category, on_delete = models.CASCADE, blank = True, null = True)
 
     def __str__(self):
         return f"{self.business} item: {self.name}"
@@ -30,6 +35,8 @@ class Order(models.Model):
     user_from = models.CharField(max_length = 500) #holds the usernamem of the user that made the order
     created_at = models.DateTimeField(auto_now_add=True)
     amount = models.PositiveIntegerField()
+    active = models.BooleanField(default = False)
+    fulfilled = models.BooleanField(default = False)
 
     def __str__(self):
         return f"order_id: {self.pk}"

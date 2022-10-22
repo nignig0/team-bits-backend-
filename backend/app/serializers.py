@@ -33,27 +33,30 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ['pk', 'username']
 
 class BusinessSerializer(serializers.ModelSerializer):
-    owner = serializers.PrimaryKeyRelatedField(
-        queryset = Business.objects.all()
-    )
     class Meta:
         model = Business
-        fields = ['name', 'owner']
-        read_only_fields = ['logo_url']
+        fields = ['name', 'description','owner', 'logo_url']
+        read_only_fields = ['owner','logo_url', ]
 
 class ItemSerializer(serializers.ModelSerializer):
+    categories = serializers.SlugRelatedField(
+        slug_field = 'name',
+        queryset = Category.objects.all(), 
+        many = True
+    )
     class Meta: 
         model = Item
-        fields = ['name', 'price', 'description', 'type']
+        fields = ['name', 'price', 'description', 'category', 'business', 'picture_url']
         read_only_fields = ['business', 'picture_url']
 
-class Order(serializers.ModelSerializer):
+class OrderSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Order
-        fields = ['item', 'amount']
+        fields = ['item', 'amount', 'user_from',]
         read_only_fields = ['user_from', 'amount'] 
 
 class CartSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Cart
+        fieds = ['orders', 'total']
         read_only_fields = ['orders', 'total']
