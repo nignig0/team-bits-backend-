@@ -46,6 +46,7 @@ class ItemSerializer(serializers.ModelSerializer):
         read_only_fields = ['business', 'picture_url']
 
 class OrderSerializer(serializers.ModelSerializer):
+    item = ItemSerializer()
     class Meta: 
         model = Order
         fields = ['pk', 'item', 'amount', 'user_from',]

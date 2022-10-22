@@ -3,6 +3,7 @@ from functools import total_ordering
 from django.utils import timezone
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
+from requests import delete
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
@@ -272,6 +273,7 @@ def remove_from_cart(request, pk): #primary key of order to be removed
         cart = Cart.objects.get(user = request.user)
         order  = Order.objects.get(pk = pk)
         cart.orders.remove(order)
+        order.delete()
 
         total = int(order.amount * order.item.price)
         cart.total -= total
