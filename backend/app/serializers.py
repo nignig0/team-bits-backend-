@@ -39,10 +39,7 @@ class BusinessSerializer(serializers.ModelSerializer):
         read_only_fields = ['pk','owner','logo_url', ]
 
 class ItemSerializer(serializers.ModelSerializer):
-    category = serializers.SlugRelatedField(
-        slug_field = 'name',
-        queryset = Category.objects.all(), 
-    )
+    category = serializers.CharField()
     class Meta: 
         model = Item
         fields = ['name', 'price', 'description', 'category', 'business', 'picture_url']
