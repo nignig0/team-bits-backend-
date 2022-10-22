@@ -57,3 +57,8 @@ class CartSerializer(serializers.ModelSerializer):
         model = Cart
         fields = ['orders', 'total']
         read_only_fields = ['orders', 'total']
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta: 
+        model  = Category
+        fields = ['name']        

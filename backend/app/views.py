@@ -365,3 +365,12 @@ def mark_order_as_fulfilled_or_not(request, pk):
             "error": True,
             "message": "There was an error"
         })
+
+@api_view(['GET'])
+@permission_classes((AllowAny,))
+def get_categories(request):
+    categories = Category.objects.all()
+    serialized_categories = CategorySerializer(categories, many = True)
+    return Response({
+        'data': serialized_categories.data
+    })
