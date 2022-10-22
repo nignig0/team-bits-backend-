@@ -178,13 +178,14 @@ def create_items(request):
             name = request.data.get('name')
             cloudinary.uploader.upload(file, public_id = f'logo for item {name} for business {business}', overwrite = True, uniqueFilename = True)
             url = cloudinary.CloudinaryImage(f'logo for business {name} for business {business}').build_url()
+            category = Category.objects.get(name = request.data.get('category'))
             item  = Item.objects.create(
                 name = request.data.get('name'), 
                 picture_url = url, 
                 business = business, 
                 price = int(request.data.get('price')), 
                 description = request.data.get('description'), 
-                category = request.data.get('category'),
+                category = category,
             )
 
             serialized_item = ItemSerializer(item)
