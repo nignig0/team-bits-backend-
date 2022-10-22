@@ -310,6 +310,22 @@ def checkout(request):
         })         
 
 @api_view(['GET'])
+def get_cart(request):
+    try:
+        cart = Cart.objects.get(user = request.user)
+        serialized_cart = CartSerializer(cart)
+        return Response({
+            'message': 'retrieved cart successfully!', 
+            'cart': serialized_cart.data
+        })
+    except Exception as e: 
+        print(e)
+        return Response({
+            "error": True,
+            "message": "There was an error"
+        })    
+
+@api_view(['GET'])
 def get_orders(request):
     try:
         business = Business.objects.get(owner = request.user)
