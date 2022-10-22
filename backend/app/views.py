@@ -182,7 +182,7 @@ def create_items(request):
                 name = request.data.get('name'), 
                 picture_url = url, 
                 business = business, 
-                price = request.data.get('price'), 
+                price = int(request.data.get('price')), 
                 description = request.data.get('description'), 
                 category = request.data.get('category'),
             )
