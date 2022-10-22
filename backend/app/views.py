@@ -330,7 +330,7 @@ def get_cart(request):
 def get_orders(request):
     try:
         business = Business.objects.get(owner = request.user)
-        orders = Order.objects.filter(Q(fulfilled = False) & Q(item__in = business.item_set.all()))
+        orders = Order.objects.filter(Q(fulfilled = False) & Q(item__in = business.item_set.all()) &Q(active = True))
         #get orders that are unfulfilled and relate to the business in question 
         serialized_orders = OrderSerializer(orders, many = True)
 
