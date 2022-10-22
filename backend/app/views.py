@@ -292,7 +292,7 @@ def remove_from_cart(request, pk): #primary key of order to be removed
 def checkout(request):
     try:
         cart = Cart.objects.get(user = request.user)
-        for order in cart.orders:
+        for order in cart.orders.all():
             order.active = True
             order.save()
 
