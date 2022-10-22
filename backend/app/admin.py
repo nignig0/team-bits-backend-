@@ -7,4 +7,4 @@ admin.site.register(Business)
 admin.site.register(Item)
 admin.site.register(Order)
 admin.site.register(Cart)
-
+admin.site.register(Category)
