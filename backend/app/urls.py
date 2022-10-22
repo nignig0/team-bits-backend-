@@ -7,7 +7,7 @@ urlpatterns = [
 
     path('business/create/', views.create_business),
     path('business/', views.get_businesses),
-    path('business/<int:pk>', views.get_business_details),
+    path('business/<int:pk>/', views.get_business_details),
 
     path('items/create/', views.create_items),
     path('items/', views.get_all_items),
