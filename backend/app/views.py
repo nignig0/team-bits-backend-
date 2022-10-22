@@ -193,6 +193,8 @@ def create_items(request):
                 'message': 'item added successfully', 
                 'data': serialized_item.data
             })
+        else: 
+            return Response(instance.errors, status= status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     except Exception as e: 
         print(e)
