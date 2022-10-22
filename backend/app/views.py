@@ -313,10 +313,11 @@ def checkout(request):
 def get_cart(request):
     try:
         cart = Cart.objects.get(user = request.user)
-        serialized_cart = CartSerializer(cart)
+        orders  = OrderSerializer(cart.orders)
         return Response({
             'message': 'retrieved cart successfully!', 
-            'cart': serialized_cart.data
+            'cart': orders.data, 
+            'total': cart.total
         })
     except Exception as e: 
         print(e)
