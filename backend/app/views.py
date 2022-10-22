@@ -313,7 +313,7 @@ def checkout(request):
 def get_cart(request):
     try:
         cart = Cart.objects.get(user = request.user)
-        orders  = OrderSerializer(cart.orders)
+        orders  = OrderSerializer(cart.orders, many = True)
         return Response({
             'message': 'retrieved cart successfully!', 
             'cart': orders.data, 
