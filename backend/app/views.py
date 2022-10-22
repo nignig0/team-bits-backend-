@@ -271,7 +271,7 @@ def remove_from_cart(request, pk): #primary key of order to be removed
     try:
         cart = Cart.objects.get(user = request.user)
         order  = Order.objects.get(pk = pk)
-        cart.remove(order)
+        cart.orders.remove(order)
 
         total = int(order.amount * order.item.price)
         cart.total -= total
