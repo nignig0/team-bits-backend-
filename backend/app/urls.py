@@ -19,5 +19,5 @@ urlpatterns = [
     path('cart/checkout/', views.checkout), 
 
     path('orders/', views.get_orders),
-    path('orders/mark/', views.mark_order_as_fulfilled_or_not)
+    path('orders/mark/<int:pk>/', views.mark_order_as_fulfilled_or_not)
 ]
